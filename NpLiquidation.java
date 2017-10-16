@@ -15,6 +15,8 @@ package com.nextel.bean;
  //                              en BD:  ORIGENPORTA, ESTADOPORTA, CEDENTEPORTA
  // KCARPIOT        12-08-2014   DEPOSITO EN GARANTIA: Se agrega campo de Descripcion del 
  //                              Tipo de Depósito para Reporte de Liquidaciones
+ //VPEREZ           20-09-017    PRY - 0925: SE AGREGA CAMPO DE  MONTO FINANCIAR Y NRO COUTA
+                                  
  
 public class NpLiquidation implements java.io.Serializable {
 
@@ -93,6 +95,12 @@ public class NpLiquidation implements java.io.Serializable {
     //FBERNALES 26/01/2015 - TIPO DE OPERACION
     private String NpTypeOperation;
     
+    //VPEREZ  20/09/2017 PRY - 0925 INICIO
+    
+    private Float NpMontoFinanciar;
+    private String NpNroCuotas;
+    
+    //VPEREZ 20/09/2017 PRY - 0925 FIN
     
     
     // Constructors
@@ -621,4 +629,22 @@ public class NpLiquidation implements java.io.Serializable {
     public String getNpTypeOperation() {
         return NpTypeOperation;
     }
+
+    //VPEREZ  20/09/2017 VEP INICIO
+    public Float getNpMontoFinanciar() {
+        return NpMontoFinanciar;
+    }
+
+    public void setNpMontoFinanciar(Float NpMontoFinanciar) {
+        this.NpMontoFinanciar = NpMontoFinanciar;
+    }
+
+    public String getNpNroCuotas() {
+        return NpNroCuotas;
+    }
+
+    public void setNpNroCuotas(String NpNroCuotas) {
+        this.NpNroCuotas = NpNroCuotas;
+    }
+    //VPEREZ  20/09/2017 VEP FIN
 }

@@ -2319,7 +2319,9 @@ public class ConsultAction extends GenericAction {
     //KCARPIOT 31-07-2014 PORTA: Se agrega campos de Descripcion para Reporte de Liquidaciones
     //                    en BD:  ORIGENPORTA, ESTADOPORTA, CEDENTEPORTA   
     //KCARPIOT 12-08-2014 DEPOSITO EN GARANTIA: Se agrega campo de Descripcion del Tipo de Depósito para Reporte de Liquidaciones
-    
+    //VPEREZ  20-09-2017 PRY - 0925: SE AGREGA CAMPO DE  MONTO FINANCIAR Y NRO COUTA
+    //                               SE MODIFICA EL NOMBRE DE PRECIO SKU POR PRECIO/CUOTA INICIAL SKU
+     
      public ActionForward liquidationReport(ActionMapping mapping, ActionForm form,
                           HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -2458,7 +2460,11 @@ public class ConsultAction extends GenericAction {
              sb.append("<td class=x174>").append("Modelo").append("</td>");
              sb.append("<td class=x174>").append("Plan Tarifario").append("</td>");
              sb.append("<td class=x174>").append("Precio Orden").append("</td>");
-             sb.append("<td class=x174>").append("Precio SKU").append("</td>");
+			 // VPEREZ 20/09/2017 PRY - 0925 INICIO
+             sb.append("<td class=x174>").append("Precio / Cuota Inicial SKU").append("</td>");
+             sb.append("<td class=x174>").append("Monto Financiar").append("</td>");
+             sb.append("<td class=x174>").append("Nro Cuotas").append("</td>");
+			 // VPEREZ 20/09/2017 PRY - 0925 FIN
              sb.append("<td class=x174>").append("Depósito Garantía").append("</td>");
              sb.append("<td class=x174>").append("SKU Depósito Garantía").append("</td>");
              sb.append("<td class=x174>").append("Monto Depósito Garantía").append("</td>");
@@ -2528,6 +2534,10 @@ public class ConsultAction extends GenericAction {
                    sb.append("<td>").append(liquidBean.getNpplantarif()).append("</td>");
                    sb.append("<td class=xl72>").append(liquidBean.getNppriceequip()).append("</td>");
                    sb.append("<td class=xl72>").append(liquidBean.getNppricekit()).append("</td>");
+				   // VPEREZ 20/09/2017 PRY - 0925 INICIO
+                   sb.append("<td class=xl72>").append(liquidBean.getNpMontoFinanciar()).append("</td>");
+                   sb.append("<td>").append(liquidBean.getNpNroCuotas()).append("</td>");
+                   // VPEREZ 20/09/2017 PRY - 0925 FIN
                    sb.append("<td>").append(liquidBean.getNpflagdepoguarantee()).append("</td>");
                    sb.append("<td class=xl71>").append(liquidBean.getNpskudepoguarantee()).append("</td>");
                    sb.append("<td class=xl72>").append(liquidBean.getNpcostguarantee()).append("</td>");

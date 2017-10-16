@@ -91,8 +91,16 @@ public class NpProductDAO extends BaseDAO implements INpProductDAO {
     }
 
     //CRM PARA TRAER LOS MODELOS(EQUIPOS) QUE SE VENDEN EN RETAIL --> TIPO DE LINEA "EQUIPO" -->PRE PAGO
+// HHUARACA - PRY-0925
 
-     public List<NpProduct> lstProductxIdReatail(Long idPos,Long idRetail,Long idTypeLine,Long idSolution,Long idSubWarehouseAvailable,Long idLineaProducto)  {
+/*---------------------------------------------------------------------------------------------------------------------
+  Purpose: Actions del tipo Consultas
+  MODIFICATION HISTORY
+  Person     Date         Comments
+  ---------  ----------   ------------------------------------------------------------------------------------------
+  HHUARACA   10/10/2017   PRY - 0925 Se agregó el parámetro para que considere el flag VEP */
+  
+     public List<NpProduct> lstProductxIdReatail(Long idPos,Long idRetail,Long idTypeLine,Long idSolution,Long idSubWarehouseAvailable,Long idLineaProducto,Integer cmbKitVep)  {
      
             Connection conn=null;
             String storedProcedure;
@@ -101,7 +109,7 @@ public class NpProductDAO extends BaseDAO implements INpProductDAO {
             
              ResultSet rs = null;
              av_message = null;
-             storedProcedure = "begin NPPRODUCT_PKG.SP_GET_NpProductXPrePago_LST(?,?,?,?,?,?,?,?); end;";
+             storedProcedure = "begin NPPRODUCT_PKG.SP_GET_NpProductXPrePago_LST(?,?,?,?,?,?,?,?,?); end;";
              List<NpProduct> lstEntitiesxFilters = new ArrayList<NpProduct>();
              try{
                      conn = ConnectionDB.getConnection();
@@ -114,8 +122,9 @@ public class NpProductDAO extends BaseDAO implements INpProductDAO {
                       stmt.registerOutParameter(2, OracleTypes.CURSOR);
 
                      //Se configuran los demás parámetros del stored
-                     stmt = configureProduct2(stmt,idPos,idRetail,idTypeLine,idSolution,idSubWarehouseAvailable,idLineaProducto);
-
+					 //HHUARACA - PRY-0925 - Inicio
+                     stmt = configureProduct2(stmt,idPos,idRetail,idTypeLine,idSolution,idSubWarehouseAvailable,idLineaProducto,cmbKitVep);
+					 //HHUARACA - PRY-0925 - Fin	
                      //Se ejecuta el statement
                      stmt.execute();
 
@@ -147,8 +156,14 @@ public class NpProductDAO extends BaseDAO implements INpProductDAO {
     }
 
     //CRM PARA TRAER LOS MODELOS(EQUIPOS) QUE SE VENDEN EN RETAIL --> TIPO DE LINEA "EQUIPO" -->POST PAGO
+/*---------------------------------------------------------------------------------------------------------------------
+  Purpose: Actions del tipo Consultas
+  MODIFICATION HISTORY
+  Person     Date         Comments
+  ---------  ----------   ------------------------------------------------------------------------------------------
+  HHUARACA   10/10/2017   PRY - 0925 Se agregó el parámetro para que considere el flag VEP */
 
-     public List<NpProduct> lstProductxPostPago(Long idPos,Long idRetail,Long idTypeLine,Long idSolution,Long idSubWarehouseAvailable,Long idLineaProducto,String strRiesgoFinan, String strIncompredictor,String tipoOperacion)  {
+     public List<NpProduct> lstProductxPostPago(Long idPos,Long idRetail,Long idTypeLine,Long idSolution,Long idSubWarehouseAvailable,Long idLineaProducto,String strRiesgoFinan, String strIncompredictor,String tipoOperacion,Integer cmbKitVep)  {
      
             Connection conn=null;
             String storedProcedure;
@@ -157,7 +172,7 @@ public class NpProductDAO extends BaseDAO implements INpProductDAO {
             
              ResultSet rs = null;
              av_message = null;
-             storedProcedure = "begin NPPRODUCT_PKG.SP_GET_NpProductXPostPago_LST(?,?,?,?,?,?,?,?,?,?,?); end;";
+             storedProcedure = "begin NPPRODUCT_PKG.SP_GET_NpProductXPostPago_LST(?,?,?,?,?,?,?,?,?,?,?,?); end;";
              List<NpProduct> lstEntitiesxFilters = new ArrayList<NpProduct>();
              try{
                      conn = ConnectionDB.getConnection();
@@ -170,8 +185,9 @@ public class NpProductDAO extends BaseDAO implements INpProductDAO {
                       stmt.registerOutParameter(2, OracleTypes.CURSOR);
 
                      //Se configuran los demás parámetros del stored
-                     stmt = configureProduct4(stmt,idPos,idRetail,idTypeLine,idSolution,idSubWarehouseAvailable,idLineaProducto,strRiesgoFinan, strIncompredictor,tipoOperacion);
-
+					 //HHUARACA - PRY-0925 - Inicio
+                     stmt = configureProduct4(stmt,idPos,idRetail,idTypeLine,idSolution,idSubWarehouseAvailable,idLineaProducto,strRiesgoFinan, strIncompredictor,tipoOperacion,cmbKitVep);
+					 //HHUARACA - PRY-0925 - Fin
                      //Se ejecuta el statement
                      stmt.execute();
 
@@ -327,7 +343,14 @@ public class NpProductDAO extends BaseDAO implements INpProductDAO {
     }
     
     //CRM PARA TRAER LOS MODELOS QUE TIENE PRECIOS ESPECIALES
-     public List<NpProduct> lstProductSpecialPrice(Long idPos,Long idRetail,Long idTypeLine,Long idSolution,Long idSubWarehouseAvailable,Long idLineaProducto)  {
+/*---------------------------------------------------------------------------------------------------------------------
+  Purpose: Actions del tipo Consultas
+  MODIFICATION HISTORY
+  Person     Date         Comments
+  ---------  ----------   ------------------------------------------------------------------------------------------
+  HHUARACA   10/10/2017   PRY - 0925 Se agregó el parámetro para que considere el flag VEP */
+  
+     public List<NpProduct> lstProductSpecialPrice(Long idPos,Long idRetail,Long idTypeLine,Long idSolution,Long idSubWarehouseAvailable,Long idLineaProducto,Integer cmbKitVep)  {
              
              Connection conn=null;
              String storedProcedure;
@@ -336,7 +359,7 @@ public class NpProductDAO extends BaseDAO implements INpProductDAO {
              
              ResultSet rs = null;
              av_message = null;
-             storedProcedure = "begin NPPRODUCT_PKG.SP_GET_NpProductSpecialPrice(?,?,?,?,?,?,?,?); end;";
+             storedProcedure = "begin NPPRODUCT_PKG.SP_GET_NpProductSpecialPrice(?,?,?,?,?,?,?,?,?); end;";
              List<NpProduct> lstEntitiesxFilters = new ArrayList<NpProduct>();
              try{
                      conn = ConnectionDB.getConnection();
@@ -349,8 +372,9 @@ public class NpProductDAO extends BaseDAO implements INpProductDAO {
                       stmt.registerOutParameter(2, OracleTypes.CURSOR);
 
                      //Se configuran los demás parámetros del stored
-                     stmt = configureProduct(stmt,idPos,idRetail,idTypeLine,idSolution,idSubWarehouseAvailable,idLineaProducto);
-
+					 //HHUARACA - PRY-0925 - Inicio
+                     stmt = configureProduct(stmt,idPos,idRetail,idTypeLine,idSolution,idSubWarehouseAvailable,idLineaProducto,cmbKitVep);
+					 //HHUARACA - PRY-0925 - Fin
                      //Se ejecuta el statement
                      stmt.execute();
 
@@ -705,7 +729,15 @@ public class NpProductDAO extends BaseDAO implements INpProductDAO {
          //bean.setNumberProduct(rs.getString("NPIMEI"));
          return (bean);
      }
-     private CallableStatement configureProduct(CallableStatement stmt,Long idPos,Long idRetail,Long idTypeLine,Long idSolution,Long idSubWarehouseAvailable,Long idLineaProducto)
+	 
+  /*---------------------------------------------------------------------------------------------------------------------
+  Purpose: Actions del tipo Consultas
+  MODIFICATION HISTORY
+  Person     Date         Comments
+  ---------  ----------   ------------------------------------------------------------------------------------------
+  HHUARACA   10/10/2017   PRY - 0925 Se agregó el parámetro para que considere el flag VEP */
+  
+     private CallableStatement configureProduct(CallableStatement stmt,Long idPos,Long idRetail,Long idTypeLine,Long idSolution,Long idSubWarehouseAvailable,Long idLineaProducto,Integer cmbKitVep)
      throws SQLException{
         int param_position1 = 3;
         int param_position2 = 4;
@@ -713,6 +745,9 @@ public class NpProductDAO extends BaseDAO implements INpProductDAO {
         int param_position4 = 6;
         int param_position5 = 7;
         int param_position6 = 8;
+		//HHUARACA - PRY-0925 - Inicio
+        int param_position7=9;
+		//HHUARACA - PRY-0925 - Fin
         
         stmt.setLong(param_position1++, idPos);
         stmt.setLong(param_position2++, idRetail);
@@ -720,11 +755,21 @@ public class NpProductDAO extends BaseDAO implements INpProductDAO {
         stmt.setLong(param_position4++, idSolution);
         stmt.setLong(param_position5++, idSubWarehouseAvailable);
         stmt.setLong(param_position6++, idLineaProducto);
+		//HHUARACA - PRY-0925 - Inicio
+        stmt.setInt(param_position7++, cmbKitVep);
+		//HHUARACA - PRY-0925 - Fin
         
         return(stmt);
      }
 
-    private CallableStatement configureProduct2(CallableStatement stmt,Long idPos,Long idRetail,Long idTypeLine,Long idSolution,Long idSubWarehouseAvailable,Long idLineaProducto)
+  /*---------------------------------------------------------------------------------------------------------------------
+  Purpose: Actions del tipo Consultas
+  MODIFICATION HISTORY
+  Person     Date         Comments
+  ---------  ----------   ------------------------------------------------------------------------------------------
+  HHUARACA   10/10/2017   PRY - 0925 Se agregó el parámetro para que considere el flag VEP */
+  
+    private CallableStatement configureProduct2(CallableStatement stmt,Long idPos,Long idRetail,Long idTypeLine,Long idSolution,Long idSubWarehouseAvailable,Long idLineaProducto,Integer cmbKitVep)
     throws SQLException{
        int param_position1 = 3;
        int param_position2 = 4;
@@ -732,17 +777,31 @@ public class NpProductDAO extends BaseDAO implements INpProductDAO {
        int param_position4 = 6;
        int param_position5 = 7;
        int param_position6 = 8;
-       
+	   //HHUARACA - PRY-0925 - Inicio
+       int param_position7=9;
+       //HHUARACA - PRY-0925 - Fin
+	   
        stmt.setLong(param_position1++, idPos);
        stmt.setLong(param_position2++, idRetail);
        stmt.setLong(param_position3++, idTypeLine);
        stmt.setLong(param_position4++, idSolution);
        stmt.setLong(param_position5++, idSubWarehouseAvailable);
        stmt.setLong(param_position6++, idLineaProducto);
+	   //HHUARACA - PRY-0925 - Inicio
+        stmt.setInt(param_position7++, cmbKitVep);
+	   //HHUARACA - PRY-0925 - Fin
+
        return(stmt);
     }
 
-    private CallableStatement configureProduct4(CallableStatement stmt,Long idPos,Long idRetail,Long idTypeLine,Long idSolution,Long idSubWarehouseAvailable,Long idLineaProducto,String strRiesgoFinan,String strIncompredictor,String tipoOperacion)
+  /*---------------------------------------------------------------------------------------------------------------------
+  Purpose: Actions del tipo Consultas
+  MODIFICATION HISTORY
+  Person     Date         Comments
+  ---------  ----------   ------------------------------------------------------------------------------------------
+  HHUARACA   10/10/2017   PRY - 0925 Se agregó el parámetro para que considere el flag VEP */
+  
+    private CallableStatement configureProduct4(CallableStatement stmt,Long idPos,Long idRetail,Long idTypeLine,Long idSolution,Long idSubWarehouseAvailable,Long idLineaProducto,String strRiesgoFinan,String strIncompredictor,String tipoOperacion,Integer cmbKitVep)
     throws SQLException{
        int param_position1 = 3;
        int param_position2 = 4;
@@ -753,6 +812,10 @@ public class NpProductDAO extends BaseDAO implements INpProductDAO {
        int param_position7 = 9;
        int param_position8 = 10;
        int param_position9 = 11;
+	   //HHUARACA - PRY-0925 - Inicio
+        int param_position10=12;
+		//HHUARACA - PRY-0925 - Fin
+
        
        stmt.setLong(param_position1++, idPos);
        stmt.setLong(param_position2++, idRetail);
@@ -763,6 +826,10 @@ public class NpProductDAO extends BaseDAO implements INpProductDAO {
        stmt.setString(param_position7++, strRiesgoFinan);
        stmt.setString(param_position8++, strIncompredictor);
        stmt.setString(param_position9++, tipoOperacion);
+	   //HHUARACA - PRY-0925 - Inicio
+        stmt.setInt(param_position10++, cmbKitVep);
+		//HHUARACA - PRY-0925 - Fin
+
         
        return(stmt);
     }
@@ -825,7 +892,14 @@ public class NpProductDAO extends BaseDAO implements INpProductDAO {
          }
         //
 
-         public List<NpProduct> lstProductxPreVenta(Long idPos,Long idRetail,Long idTypeLine,Long idSolution,Long idSubWarehouseAvailable,Long idLineaProducto) {
+  /*---------------------------------------------------------------------------------------------------------------------
+  Purpose: Actions del tipo Consultas
+  MODIFICATION HISTORY
+  Person     Date         Comments
+  ---------  ----------   ------------------------------------------------------------------------------------------
+  HHUARACA   10/10/2017   PRY - 0925 Se agregó el parámetro para que considere el flag VEP */
+  
+         public List<NpProduct> lstProductxPreVenta(Long idPos,Long idRetail,Long idTypeLine,Long idSolution,Long idSubWarehouseAvailable,Long idLineaProducto,Integer cmbKitVep) {
                      
                      Connection conn=null;
                      String storedProcedure;
@@ -834,7 +908,7 @@ public class NpProductDAO extends BaseDAO implements INpProductDAO {
                      
                      ResultSet rs = null;
                      av_message = null;
-                     storedProcedure = "begin NPPRODUCT_PKG.SP_GET_NpProductXPreVenta_LST(?,?,?,?,?,?,?,?); end;";
+                     storedProcedure = "begin NPPRODUCT_PKG.SP_GET_NpProductXPreVenta_LST(?,?,?,?,?,?,?,?,?); end;";
                      List<NpProduct> lstEntitiesxFilters = new ArrayList<NpProduct>();
                      try{
                              conn = ConnectionDB.getConnection();
@@ -847,8 +921,9 @@ public class NpProductDAO extends BaseDAO implements INpProductDAO {
                               stmt.registerOutParameter(2, OracleTypes.CURSOR);
 
                              //Se configuran los demás parámetros del stored
-                             stmt = configureProduct2(stmt,idPos,idRetail,idTypeLine,idSolution,idSubWarehouseAvailable,idLineaProducto);
-
+							 //HHUARACA - PRY-0925 - Inicio
+                             stmt = configureProduct2(stmt,idPos,idRetail,idTypeLine,idSolution,idSubWarehouseAvailable,idLineaProducto,cmbKitVep);
+							 //HHUARACA - PRY-0925 - Fin
                              //Se ejecuta el statement
                              stmt.execute();
 
@@ -1146,7 +1221,8 @@ public class NpProductDAO extends BaseDAO implements INpProductDAO {
         //                              en BD:  ORIGENPORTA, ESTADOPORTA, CEDENTEPORTA
         // KCARPIOT        12-08-2014   DEPOSITO EN GARANTIA: Se agrega campo de Descripcion del 
         //                              Tipo de Depósito para Reporte de Liquidaciones
-        
+        //VPEREZ             20/09/2017  VEP : SE AGREGA CAMPO DE CAMPO INICIAL, MONTO FINANCIAR Y NRO COUTA
+         
          public List<NpLiquidation> getLiquidationReport(Map bean)  {                
          
              Connection conn=null;
@@ -1236,7 +1312,11 @@ public class NpProductDAO extends BaseDAO implements INpProductDAO {
                          liquidBean.setNpmodelo(rs.getString("MODELO"));
                          liquidBean.setNpplantarif(rs.getString("PLAN_TARIFARIO"));
                          liquidBean.setNppriceequip(rs.getFloat("PRECIO_EQUIPO")); 
-                         liquidBean.setNppricekit(rs.getFloat("PRECIO_KIT"));
+                         liquidBean.setNppricekit(rs.getFloat("PRECIO_KIT")); //
+						 ///VPEREZ 20/09/2017 PRY-0925 Inicio
+                         liquidBean.setNpMontoFinanciar(rs.getFloat("MONTO_FINANCIAR")); //VEP
+                         liquidBean.setNpNroCuotas(rs.getString("NRO_CUOTA")); //VEP
+						 ///VPEREZ 20/09/2017 PRY-0925 Fin
                          liquidBean.setNpflagdepoguarantee(rs.getString("FLAG_DEPOSITO_GARANTIA"));                        
                          liquidBean.setNpskudepoguarantee(rs.getString("SKU_DEPO_GARANTIA"));
                          liquidBean.setNpcostguarantee(rs.getFloat("COST_GUARANTEE"));
